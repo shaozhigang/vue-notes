@@ -39,6 +39,9 @@ const Note = {
   computed: {
     header() {
       return _.truncate(this.entity.body, { length: 30 })
+    },
+    updated() {
+      return moment(this.entity.meta.updated).fromNow()
     }
   },
   methods: {
@@ -54,6 +57,9 @@ const Note = {
   },
   template: `
     <div class="item">
+      <div class="meta">
+        {{ updated }}
+      </div>
       <div class="content">
         <div class="header" v-on:click="open = !open">
           {{ header || '新建笔记'}}
