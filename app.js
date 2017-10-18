@@ -7,13 +7,20 @@ const Editor = {
       entity: this.entityObject
     }
   },
+  methods: {
+    update() {
+      /*触发自定义的 update事件 */
+      this.$emit('update')
+    }
+  },
   template: `
     <div class="ui form">
       <div class="field">
         <textarea
           row="5"
           placeholder="写点东西..."
-          v-model="entity.body">
+          v-model="entity.body"
+          v-on:input="update">
         </textarea>
       </div>
     </div>
@@ -34,6 +41,14 @@ const Note = {
       return _.truncate(this.entity.body, { length: 30 })
     }
   },
+  methods: {
+    save() {
+      loadCollection('notes').then((collection) => {
+        collection.update(this.entity)
+        db.saveDatabase()
+      })
+    }
+  },
   components: {
     'editor': Editor
   },
@@ -46,7 +61,8 @@ const Note = {
         <div class="extra">
           <editor
             v-bind:entity-object="entity"
-            v-if="open"></editor>
+            v-if="open"
+            v-on:update="save"></editor>
         </div>
       </div>
     </div>
