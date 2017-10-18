@@ -29,6 +29,11 @@ const Note = {
       open: false
     }
   },
+  computed: {
+    header() {
+      return _.truncate(this.entity.body, { length: 30 })
+    }
+  },
   components: {
     'editor': Editor
   },
@@ -36,7 +41,7 @@ const Note = {
     <div class="item">
       <div class="content">
         <div class="header" v-on:click="open = !open">
-          {{ entity.body || '新建笔记'}}
+          {{ header || '新建笔记'}}
         </div>
         <div class="extra">
           <editor
