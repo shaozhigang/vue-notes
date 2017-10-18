@@ -146,6 +146,10 @@ const Notes = {
         v-bind:key="entity.$loki"
         v-on:destroy="destroy">
         </note>
+        <span class="ui small disabled header"
+          v-if="!this.entities.length">
+          还没有笔记，请按下 ‘添加笔记’ 按钮
+        </span>
       </div>
     </div>
   `
