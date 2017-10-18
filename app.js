@@ -1,4 +1,4 @@
-const note = {
+const Editor = {
   props: [
     'entityObject'
   ],
@@ -8,10 +8,38 @@ const note = {
     }
   },
   template: `
+    <div class="ui form">
+      <div class="field">
+        <textarea
+          row="5"
+          placeholder="写点东西..."
+          v-model="entity.body">
+        </textarea>
+      </div>
+    </div>
+  `
+}
+const note = {
+  props: [
+    'entityObject'
+  ],
+  data() {
+    return {
+      entity: this.entityObject
+    }
+  },
+  components: {
+    'editor': Editor
+  },
+  template: `
     <div class="item">
       <div class="content">
         <div class="header">
           {{ entity.body || '新建笔记'}}
+        </div>
+        <div class="extra">
+          <editor
+            v-bind:entity-object="entity"></editor>
         </div>
       </div>
     </div>
