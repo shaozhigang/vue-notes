@@ -5,7 +5,7 @@ const db = new loki('notes', {
   autosaveInterval: 3000
 })
 
-function datebaseInitialize() {
+function databaseInitialize() {
   const notes = db.getCollection('notes')
   if (notes === null) {
     db.addCollection('notes')
